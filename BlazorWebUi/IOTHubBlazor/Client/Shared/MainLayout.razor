@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page" style="height:100%">
+    <div class="sidebar" >
+        <NavMenu />
+    </div>
+
+    <main style="height:75vh">
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4" style="height:100%">
+            @Body
+        </article>
+    </main>
+</div>

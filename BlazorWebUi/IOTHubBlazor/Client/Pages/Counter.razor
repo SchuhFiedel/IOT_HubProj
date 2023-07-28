@@ -1,0 +1,232 @@
+﻿
+@page "/counter"
+@using System.Globalization;
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<RadzenCard class="my-4" Style="height:100%">
+    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Gap="1em" Style="height:50%">
+        <RadzenStack Orientation="Orientation.Vertical" Style="box-shadow: 0px 0px 20px grey; border-radius:10px; width:100%; height:100%; ">
+            <div style="height:100%; width:100%; display:flex; justify-content:center; align-items:center;">
+                <div>
+                    <p role="status">Current count: @currentCount.ToString("000")</p>
+                    <RadzenButton Click="@IncrementCount" Text="Click me"></RadzenButton>
+                </div>
+            </div>
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Vertical" Style="box-shadow: 0px 0px 20px grey; height:100%; width:100%;  border-radius:10px; ">
+
+            <div width="100%" style="text-align:center">Hydration Level</div>
+
+            <RadzenArcGauge Style="width: 100%;height:100%">
+                <RadzenArcGaugeScale Step="10" Min="0" Max="100" MinorStep="1" Radius="0.9" TickPosition=@tickPosition Y="0.9" Margin="0">
+                    <RadzenArcGaugeScaleValue Value=@currentCount ShowValue=@showValue>
+                        <Template Context="pointer">
+                            @pointer.Value %
+                        </Template>
+                    </RadzenArcGaugeScaleValue>
+                </RadzenArcGaugeScale>
+            </RadzenArcGauge>
+        </RadzenStack>
+
+        <RadzenStack Orientation="Orientation.Vertical" Style="box-shadow: 0px 0px 20px grey; height:100%; width:100%;  border-radius:10px; ">
+            <div style="text-align:center;width=100%;">Temperature Level</div>
+
+            <RadzenChart style="width=100%; height:100%;">
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
+                    <RadzenMarkers MarkerType="MarkerType.Auto" />
+                    <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                </RadzenLineSeries>
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2020" CategoryProperty="Date" Title="2020" ValueProperty="Revenue">
+                    <RadzenMarkers  />
+                    <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                </RadzenLineSeries>
+                <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
+                <RadzenValueAxis Formatter="@Format">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="Temp °C" />
+                </RadzenValueAxis>
+            </RadzenChart>
+        </RadzenStack>
+
+    </RadzenStack>
+
+    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Gap="1em" Style="height:50%">
+        
+        <RadzenStack Orientation="Orientation.Vertical" Style="box-shadow: 0px 0px 20px grey; border-radius:10px; width:32.5%; height:100%; ">
+            <div style="height:100%; width:100%; display:flex; justify-content:center; align-items:center;">
+                <div>
+                    <p role="status">Current count: @currentCount</p>
+                    <RadzenSlider Min="0" Max="100" @bind-Value=@currentCount Style="width: 100%;" />
+                </div>
+            </div>
+        </RadzenStack>
+
+    </RadzenStack>
+</RadzenCard>
+
+
+@code {
+    private int currentCount = 0;
+
+    bool showValue = true;
+    IEnumerable<GaugeTickPosition> tickPositions = Enum.GetValues(typeof(GaugeTickPosition)).Cast<GaugeTickPosition>();
+    GaugeTickPosition tickPosition = GaugeTickPosition.Outside;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    bool smooth = true;
+    bool showDataLabels = false;
+
+    class DataItem
+    {
+        public string Date { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    string Format(object value)
+    {
+        return ((double)value).ToString()+" °C";
+    }
+
+    string FormatAsMonth(object value)
+    {
+        if (value != null)
+        {
+            return Convert.ToDateTime(value).ToString("MM");
+        }
+
+        return string.Empty;
+    }
+
+    DataItem[] revenue2019 = new DataItem[] {
+        new DataItem
+        {
+            Date = ("2019-01-01"),
+            Revenue = 23
+        },
+        new DataItem
+        {
+            Date = ("2019-02-01"),
+            Revenue = 26
+        },
+        new DataItem
+        {
+            Date = ("2019-03-01"),
+            Revenue = 23
+        },
+        new DataItem
+        {
+            Date = ("2019-04-01"),
+            Revenue = 24
+        },
+        new DataItem
+        {
+            Date = ("2019-05-01"),
+            Revenue = 21
+        },
+        new DataItem
+        {
+            Date = ("2019-06-01"),
+            Revenue = 25
+        },
+        new DataItem
+        {
+            Date = ("2019-07-01"),
+            Revenue = 27
+        },
+        new DataItem
+        {
+            Date = ("2019-08-01"),
+            Revenue = 28
+        },
+        new DataItem
+        {
+            Date = ("2019-09-01"),
+            Revenue = 27
+        },
+        new DataItem
+        {
+            Date = ("2019-10-01"),
+            Revenue = 28
+        },
+        new DataItem
+        {
+            Date = ("2019-11-01"),
+            Revenue = 28
+        },
+        new DataItem
+        {
+            Date = ("2019-12-01"),
+            Revenue = 29
+        }
+    };
+
+    DataItem[] revenue2020 = new DataItem[] {
+        new DataItem
+        {
+            Date = ("2019-01-01"),
+            Revenue = 33
+        },
+        new DataItem
+        {
+            Date = ("2019-02-01"),
+            Revenue = 36
+        },
+        new DataItem
+        {
+            Date = ("2019-03-01"),
+            Revenue = 33
+        },
+        new DataItem
+        {
+            Date = ("2019-04-01"),
+            Revenue = 34
+        },
+        new DataItem
+        {
+            Date = ("2019-05-01"),
+            Revenue = 31
+        },
+        new DataItem
+        {
+            Date = ("2019-06-01"),
+            Revenue = 35
+        },
+        new DataItem
+        {
+            Date = ("2019-07-01"),
+            Revenue = 37
+        },
+        new DataItem
+        {
+            Date = ("2019-08-01"),
+            Revenue = 38
+        },
+        new DataItem
+        {
+            Date = ("2019-09-01"),
+            Revenue = 37
+        },
+        new DataItem
+        {
+            Date = ("2019-10-01"),
+            Revenue = 38
+        },
+        new DataItem
+        {
+            Date = ("2019-11-01"),
+            Revenue = 38
+        },
+        new DataItem
+        {
+            Date = ("2019-12-01"),
+            Revenue = 39
+        }
+    };
+}
