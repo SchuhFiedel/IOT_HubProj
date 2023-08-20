@@ -8,14 +8,27 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c23f9f22ed59bde0",
+            "id": "2e9ffaf2d51b8e64",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "markdown",
+              "state": {
+                "file": "Templates/TestTemplate.template.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b964ef186a8c51ce",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -135,9 +148,19 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "c23f9f22ed59bde0",
-  "lastOpenFiles": []
+  "active": "b964ef186a8c51ce",
+  "lastOpenFiles": [
+    "Overview.md",
+    "Templates/TestTemplate.template.md",
+    "Idea.md",
+    "BlazorServer.md",
+    "LAN Raspberry Pi Deployment.md",
+    "Untitled/Untitled.md",
+    "Untitled",
+    "Templates"
+  ]
 }
