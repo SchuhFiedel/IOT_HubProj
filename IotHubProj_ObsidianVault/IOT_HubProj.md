@@ -1,4 +1,4 @@
 # IOT_Hub_Project
-[[Idea]]
-[[BlazorServer]]
-[[LAN Raspberry Pi Deployment]]
+[Idea](Idea)
+[BlazorServer](BlazorServer)
+[LAN Raspberry Pi Deployment](LAN Raspberry Pi Deployment)
