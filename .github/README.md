@@ -1,1 +1,0 @@
-../IotHubProj_ObsidianVault/IOT_HubProj.md
