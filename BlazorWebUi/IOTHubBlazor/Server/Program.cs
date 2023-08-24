@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.ResponseCompression;
 
 namespace IOTHubBlazor
 {

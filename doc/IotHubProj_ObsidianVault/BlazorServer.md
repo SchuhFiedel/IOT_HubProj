@@ -12,3 +12,18 @@ In a further iteration device pages could be generic, thus being defined by the 
 The Blazor server will act as a REST service towards the Blazor frontend, as well as towards the devices on the network. Furthermore it will connect to some kind of database
 
 ## Database
+### Mongo DB Docker Container
+
+Start Docker Container:
+```docker run -dp 27017:27017 --name my-mongo -d mongo```
+
+Connection string: 
+```mongodb://localhost:27017```
+
+[C#.Net Documentation](https://www.mongodb.com/docs/drivers/csharp/v2.19/) 
+
+connect to mongo docker
+```docker exec -it my-mongo bash```
+
+mongo shell command
+```mongosh```

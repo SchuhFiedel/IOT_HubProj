@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\IOTHubBlazor.Client.csproj" />
+    <ProjectReference Include="..\IOTHubBlazor.DAL\IOTHubBlazor.DAL.csproj" />
     <ProjectReference Include="..\Shared\IOTHubBlazor.Shared.csproj" />
   </ItemGroup>
 

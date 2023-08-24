@@ -22,6 +22,8 @@ namespace IOTHubBlazor.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var x = new DAL.MongoDB();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
