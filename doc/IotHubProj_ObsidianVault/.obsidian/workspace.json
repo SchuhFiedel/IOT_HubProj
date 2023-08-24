@@ -11,8 +11,12 @@
             "id": "36ea1fbe283ae6d8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "BlazorServer.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -143,7 +147,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a05e01dfbcb7c984",
+  "active": "36ea1fbe283ae6d8",
   "lastOpenFiles": [
     "Idea.md",
     "IOT_HubProj.md",
