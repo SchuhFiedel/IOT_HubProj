@@ -12,6 +12,8 @@ namespace IOTHubBlazor
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
@@ -19,6 +21,11 @@ namespace IOTHubBlazor
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blazor API V1");
+                });
             }
             else
             {
