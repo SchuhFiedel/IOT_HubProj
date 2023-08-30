@@ -24,21 +24,34 @@ namespace IOTHubBlazor.Server.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            Console.WriteLine("ClientConnect");
-            _client.BaseAddress = new Uri("http://localhost:3000");
-            Console.WriteLine(_client.BaseAddress);
-            var value = await _client.GetAsync("/");
-            Console.WriteLine("ClientConnectEnd");
+            try
+            {
+                Console.WriteLine("ClientConnect");
+                _client.BaseAddress = new Uri("http://localhost:3000");
+                Console.WriteLine(_client.BaseAddress);
+                var value = await _client.GetAsync("/");
+                Console.WriteLine("ClientConnectEnd");
 
-            if (!value.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException(nameof(value));
+                Console.WriteLine("STATUS", value.StatusCode.ToString());
+                Console.WriteLine("VALUE", await value.Content.ReadAsStringAsync());
+                /*
+                
+                if (!value.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException(value.StatusCode.ToString());
+                }
+                else
+                {
+                    var text = await value.Content.ReadAsStringAsync();
+                    Console.WriteLine(text);
+                }
+                */
             }
-            else
+            catch (Exception e)
             {
-                var text = await value.Content.ReadAsStringAsync();
-                Console.WriteLine(text); 
+                throw new HttpRequestException(e.Message);
             }
+            
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

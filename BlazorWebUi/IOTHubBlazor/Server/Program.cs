@@ -1,6 +1,7 @@
 using Polly;
 using Polly.Contrib.WaitAndRetry;
-
+using Polly.Extensions.Http;
+using System.Linq.Dynamic.Core.Tokenizer;
 
 namespace IOTHubBlazor
 {
@@ -20,19 +21,20 @@ namespace IOTHubBlazor
             builder.Services.AddRazorPages();
             builder.Services.AddSwaggerGen();
 
-
-            builder.Services.AddHttpClient("httpClient") 
-            
-            .AddTransientHttpErrorPolicy(policyBuilder =>
-                policyBuilder.WaitAndRetryAsync(HTTPretryCount, 
-                    sleepDurationProvider: retry => Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(HTTPretrySeconds), HTTPretryCount).ToList()[retry % HTTPretryCount],
-                    onRetry: (response, timeSpan, retryCount, ctx) =>
-                    {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Retry {retryCount}, resp: {response}, time: {timeSpan}");
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    )
+            builder.Services.AddHttpClient("httpClient")
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler())
+                .AddPolicyHandler(
+                    HttpPolicyExtensions.HandleTransientHttpError()
+                        .WaitAndRetryAsync(HTTPretryCount,
+                            sleepDurationProvider: retry =>
+                                Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(HTTPretrySeconds), HTTPretryCount).ToList()[retry % HTTPretryCount],
+                            onRetry: (timeSpan, retryCount, ctx) =>
+                            {
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"Retry {retryCount}, time: {timeSpan}");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            )
             );
 
 
