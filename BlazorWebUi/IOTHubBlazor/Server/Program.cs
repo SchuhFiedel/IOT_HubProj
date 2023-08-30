@@ -1,9 +1,15 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Polly;
+using Polly.Contrib.WaitAndRetry;
+
 
 namespace IOTHubBlazor
 {
     public class Program
     {
+        //TODO GetfromConfig
+        static int HTTPretrySeconds = 1;
+        static int HTTPretryCount = 5;
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +19,21 @@ namespace IOTHubBlazor
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
             builder.Services.AddSwaggerGen();
+
+
+            builder.Services.AddHttpClient("httpClient") 
+            
+            .AddTransientHttpErrorPolicy(policyBuilder =>
+                policyBuilder.WaitAndRetryAsync(HTTPretryCount, 
+                    sleepDurationProvider: retry => Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(HTTPretrySeconds), HTTPretryCount).ToList()[retry % HTTPretryCount],
+                    onRetry: (response, timeSpan, retryCount, ctx) =>
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Retry {retryCount}, resp: {response}, time: {timeSpan}");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    )
+            );
 
 
             var app = builder.Build();

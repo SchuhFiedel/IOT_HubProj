@@ -13,15 +13,33 @@ namespace IOTHubBlazor.Server.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly HttpClient _client;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IHttpClientFactory client)
         {
             _logger = logger;
+            _client = client.CreateClient("httpClient");
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            Console.WriteLine("ClientConnect");
+            _client.BaseAddress = new Uri("http://localhost:3000");
+            Console.WriteLine(_client.BaseAddress);
+            var value = await _client.GetAsync("/");
+            Console.WriteLine("ClientConnectEnd");
+
+            if (!value.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(nameof(value));
+            }
+            else
+            {
+                var text = await value.Content.ReadAsStringAsync();
+                Console.WriteLine(text); 
+            }
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
