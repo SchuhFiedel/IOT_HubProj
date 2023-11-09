@@ -11,11 +11,28 @@
             "id": "36ea1fbe283ae6d8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "LAN Raspberry Pi Deployment.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "35a929bb78caf11a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public RPi Deployment.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "BlazorServer.md",
+                "file": "Public RPi Deployment.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "BlazorServer.md",
+                "file": "Public RPi Deployment.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -121,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "BlazorServer.md"
+                "file": "Public RPi Deployment.md"
               }
             }
           }
@@ -143,11 +160,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a05e01dfbcb7c984",
+  "active": "35a929bb78caf11a",
   "lastOpenFiles": [
-    "Idea.md",
-    "IOT_HubProj.md",
     "LAN Raspberry Pi Deployment.md",
+    "Public RPi Deployment.md",
+    "IOT_HubProj.md",
+    "Idea.md",
     "BlazorServer.md",
     "Templates/TestTemplate.template.md",
     "Untitled/Untitled.md",
